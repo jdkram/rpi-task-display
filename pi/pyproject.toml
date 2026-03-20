@@ -1,0 +1,9 @@
+[project]
+name = "rpi-zero-display"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "flask",
+    "inky[rpi,fonts]",
+    "pillow",
+]

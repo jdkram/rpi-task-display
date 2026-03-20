@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# human-contributors: Jonny Kram; ai-contributors: [Claude]; status: "#ai-written"
+# Send a task string to the Inky pHAT display server on the Pi.
+# Usage: task <text>
+# Override host/port with RPI_HOST and RPI_PORT env vars.
+
+set -euo pipefail
+
+RPI_HOST="${RPI_HOST:-rpi.local}"
+RPI_PORT="${RPI_PORT:-5000}"
+
+if [[ $# -eq 0 ]]; then
+    echo "Usage: task <text>" >&2
+    exit 1
+fi
+
+payload=$(python3 -c "import json, sys; print(json.dumps({'task': sys.argv[1]}))" "$*")
+
+curl -sf -X POST \
+    -H "Content-Type: application/json" \
+    -d "$payload" \
+    "http://${RPI_HOST}:${RPI_PORT}/task" \
+    && echo
