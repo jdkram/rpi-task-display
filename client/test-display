@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# human-contributors: Jonny Kram; ai-contributors: [Claude]; status: "#ai-written"
+# Diagnostic commands for the Inky pHAT display.
+#
+# Usage:
+#   test-display grid           -- vertical bar grid (every 10px, labels at 20px intervals)
+#   test-display solid white    -- fill white
+#   test-display solid black    -- fill black
+#   test-display solid red      -- fill red
+#
+# Override host/port with RPI_HOST and RPI_PORT env vars.
+
+set -euo pipefail
+
+RPI_HOST="${RPI_HOST:-pi0.local}"
+RPI_PORT="${RPI_PORT:-5000}"
+BASE="http://${RPI_HOST}:${RPI_PORT}"
+
+usage() {
+    echo "Usage: test-display grid | solid <white|black|red>" >&2
+    exit 1
+}
+
+[[ $# -eq 0 ]] && usage
+
+case "$1" in
+    grid)
+        curl -sf "${BASE}/test" && echo
+        ;;
+    solid)
+        [[ $# -lt 2 ]] && usage
+        curl -sf "${BASE}/test/solid/$2" && echo
+        ;;
+    *)
+        usage
+        ;;
+esac

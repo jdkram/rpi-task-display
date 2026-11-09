@@ -4,9 +4,9 @@ After=network.target
 
 [Service]
 Type=simple
-User=pi
-WorkingDirectory=/home/pi/rpi-zero-display
-ExecStart=/home/pi/rpi-zero-display/.venv/bin/python server.py
+User=jdkram
+WorkingDirectory=/home/jdkram/rpi-zero-display
+ExecStart=/usr/bin/python3 /home/jdkram/rpi-zero-display/server.py
 Restart=on-failure
 RestartSec=5
 

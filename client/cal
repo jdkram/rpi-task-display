@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# human-contributors: Jonny Kram; ai-contributors: [Claude]; status: "#ai-input"
+# Trigger the month calendar display on the Inky pHAT.
+# The Pi calculates today's date itself; no arguments needed.
+#
+# Usage: cal
+# Override Pi host/port with RPI_HOST and RPI_PORT env vars.
+
+set -euo pipefail
+
+RPI_HOST="${RPI_HOST:-pi0.local}"
+RPI_PORT="${RPI_PORT:-5000}"
+
+curl -sf "http://${RPI_HOST}:${RPI_PORT}/calendar" && echo

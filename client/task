@@ -6,7 +6,7 @@
 
 set -euo pipefail
 
-RPI_HOST="${RPI_HOST:-rpi.local}"
+RPI_HOST="${RPI_HOST:-pi0.local}"
 RPI_PORT="${RPI_PORT:-5000}"
 
 if [[ $# -eq 0 ]]; then
